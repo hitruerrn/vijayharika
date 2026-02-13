@@ -129,25 +129,37 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, #ffeef8 0%, #fff0f6 50%, #ffe8f3 100%);
+            background: linear-gradient(135deg, #ffeef8 0%, #fff0f6 25%, #ffe8f3 50%, #fff2f9 75%, #ffe5f0 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             position: relative;
             overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hero-content {
             z-index: 2;
             max-width: 800px;
-            animation: fadeInUp 1s ease-out;
+            animation: fadeInUp 1.2s ease-out;
         }
 
         .hero-content h1 {
             font-family: 'Great Vibes', cursive;
             font-size: 92px;
-            background: linear-gradient(135deg, #c2185b, #e91e63, #d63384);
+            background: linear-gradient(135deg, #c2185b, #e91e63, #d63384, #c2185b);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 20px;
+            animation: colorShift 4s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(194, 24, 91, 0.2));
+        }
             text-shadow: 2px 2px 8px rgba(194, 24, 91, 0.2);
             letter-spacing: 3px;
         }
@@ -172,16 +184,17 @@
         .cta-button {
             display: inline-block;
             padding: 14px 40px;
-            background: linear-gradient(135deg, #e91e63, #c2185b);
+            background: linear-gradient(135deg, #e91e63, #d63384, #c2185b);
+            background-size: 200% 200%;
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 700;
-            transition: 0.2s;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             border: none;
             cursor: pointer;
             font-size: 15px;
-            box-shadow: 0 6px 25px rgba(194, 24, 91, 0.25);
+            box-shadow: 0 10px 35px rgba(194, 24, 91, 0.35);
             letter-spacing: 0.5px;
             min-height: 48px;
             display: flex;
@@ -190,10 +203,18 @@
             -webkit-appearance: none;
             appearance: none;
             user-select: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 45px rgba(194, 24, 91, 0.45), 0 0 25px rgba(255, 105, 180, 0.3);
+            background-position: 200% 0;
         }
 
         .cta-button:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
         }
 
         /* Floating Hearts Background */
@@ -252,12 +273,69 @@
             100% { filter: brightness(1); }
         }
 
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            50% { transform: scale(1.1); }
+            75% { transform: scale(1.05); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        @keyframes romanticFloat {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.4; }
+            25% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
+            50% { transform: translateY(-10px) translateX(-10px); opacity: 0.5; }
+            75% { transform: translateY(-25px) translateX(15px); opacity: 0.7; }
+        }
+
+        @keyframes glowIntensify {
+            0% { box-shadow: 0 5px 20px rgba(194, 24, 91, 0.2); }
+            50% { box-shadow: 0 15px 50px rgba(233, 30, 99, 0.5), 0 0 30px rgba(255, 105, 180, 0.3); }
+            100% { box-shadow: 0 5px 20px rgba(194, 24, 91, 0.2); }
+        }
+
+        @keyframes softBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes colorShift {
+            0% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(10deg); }
+            100% { filter: hue-rotate(0deg); }
+        }
+
+        @keyframes romanticFade {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
         /* Sections */
         section {
             padding: 50px 20px;
             max-width: 100%;
             margin: 0 auto;
             animation: fadeInUp 0.8s ease-out;
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(219, 39, 119, 0.3), transparent);
         }
 
         h2 {
@@ -265,7 +343,7 @@
             font-size: 40px;
             text-align: center;
             margin-bottom: 40px;
-            background: linear-gradient(135deg, #c2185b, #e91e63);
+            background: linear-gradient(135deg, #c2185b, #e91e63, #d63384);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -273,6 +351,8 @@
             padding-bottom: 15px;
             font-weight: 700;
             letter-spacing: 1px;
+            animation: romanticFade 0.8s ease-out;
+            text-shadow: 0 2px 10px rgba(194, 24, 91, 0.1);
         }
 
         h2::after {
@@ -280,6 +360,19 @@
             display: block;
             font-size: 24px;
             margin-top: 10px;
+            animation: heartPulse 2s infinite;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #e91e63, transparent);
+            border-radius: 2px;
         }
 
         /* Our Story Timeline */
@@ -322,35 +415,52 @@
         }
 
         .timeline-content {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             padding: 30px;
             border-radius: 18px;
-            box-shadow: 0 8px 35px rgba(194, 24, 91, 0.15);
-            transition: 0.3s;
+            box-shadow: 0 12px 40px rgba(194, 24, 91, 0.18);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             border-left: 4px solid #e91e63;
             backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            animation: romanticFade 0.8s ease-out;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e91e63, transparent);
         }
 
         .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(212, 51, 132, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 18px 50px rgba(212, 51, 132, 0.35), 0 0 25px rgba(255, 105, 180, 0.2);
+            border-left-color: #d63384;
         }
 
         .timeline-content h3 {
             color: #d63384;
             margin-bottom: 10px;
             font-size: 20px;
+            font-weight: 700;
         }
 
         .timeline-content p {
-            color: #666;
-            line-height: 1.6;
+            color: #555;
+            line-height: 1.7;
+            font-weight: 400;
         }
 
         .timeline-date {
             font-size: 14px;
             color: #999;
             margin-top: 8px;
+            font-style: italic;
         }
 
         /* Memories Gallery */
@@ -366,6 +476,7 @@
             transition: 0.4s ease-in-out;
             animation: scaleIn 0.6s ease-out forwards;
             opacity: 0;
+            position: relative;
         }
 
         .gallery-item:nth-child(1) { animation-delay: 0.1s; }
@@ -375,19 +486,32 @@
         .gallery-item:nth-child(5) { animation-delay: 0.5s; }
         .gallery-item:nth-child(6) { animation-delay: 0.6s; }
 
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            border-radius: 16px;
+            pointer-events: none;
+        }
+
         .gallery-item:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px);
         }
 
         .gallery-item:hover .gallery-image {
-            animation: shine 0.6s ease-in-out, glow 0.6s ease-in-out;
+            animation: glowIntensify 0.8s ease-in-out;
+            transform: scale(1.05);
         }
 
         .gallery-image {
             position: relative;
             overflow: hidden;
             border-radius: 16px;
-            box-shadow: 0 10px 35px rgba(194, 24, 91, 0.2);
+            box-shadow: 0 15px 40px rgba(194, 24, 91, 0.25);
             max-width: 100%;
             max-height: 400px;
             cursor: pointer;
@@ -395,9 +519,10 @@
             width: auto;
             height: auto;
             object-fit: contain;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease-in-out, filter 0.4s ease-in-out;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease-in-out, filter 0.5s ease-in-out;
+            border: 3px solid rgba(255, 255, 255, 0.4);
             display: block;
+        }
             margin: 0 auto;
         }
 
@@ -503,17 +628,27 @@
         }
 
         .promise-card {
-            background: white;
-            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 240, 246, 0.95));
+            padding: 25px;
             border-radius: 16px;
             text-align: center;
-            box-shadow: 0 8px 30px rgba(194, 24, 91, 0.12);
-            transition: 0.2s;
+            box-shadow: 0 12px 35px rgba(194, 24, 91, 0.15);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow: hidden;
             border-top: 3px solid #e91e63;
             backdrop-filter: blur(10px);
+            animation: romanticFade 0.8s ease-out both;
+            border: 1px solid rgba(255, 105, 180, 0.2);
         }
+
+        .promise-card:nth-child(1) { animation-delay: 0.1s; }
+        .promise-card:nth-child(2) { animation-delay: 0.2s; }
+        .promise-card:nth-child(3) { animation-delay: 0.3s; }
+        .promise-card:nth-child(4) { animation-delay: 0.4s; }
+        .promise-card:nth-child(5) { animation-delay: 0.5s; }
+        .promise-card:nth-child(6) { animation-delay: 0.6s; }
+        .promise-card:nth-child(7) { animation-delay: 0.7s; }
 
         .promise-card::before {
             content: '💖';
@@ -523,6 +658,24 @@
             top: -10px;
             right: -10px;
             z-index: 0;
+            animation: romanticFloat 6s infinite ease-in-out;
+        }
+
+        .promise-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(255,105,180,0.1), transparent);
+            pointer-events: none;
+        }
+
+        .promise-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 50px rgba(194, 24, 91, 0.25), 0 0 20px rgba(219, 39, 119, 0.15);
+            border-top-color: #d63384;
         }
 
         .promise-card:active {
@@ -530,11 +683,12 @@
         }
 
         .promise-card p {
-            color: #666;
-            line-height: 1.6;
-            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+            font-size: 15px;
             position: relative;
             z-index: 1;
+            font-weight: 500;
         }
 
         /* Secret Message */
@@ -910,27 +1064,19 @@
         <h2>Beautiful Memories</h2>
         <div class="gallery">
             <div class="gallery-item">
-                <img src="https://image2url.com/r2/default/images/1771002976271-67a5d25b-d5e2-4bd5-a63d-a007dc182a1b.png" alt="Our Beautiful Memories" class="gallery-image">
+                <img src="https://image2url.com/r2/default/images/1771007402698-4f5b04b9-5aff-415f-9a25-4dc16123877f.jpeg" alt="Our Beautiful Memories" class="gallery-image">
                 <div class="gallery-caption">Our Beautiful Memories</div>
             </div>
             <div class="gallery-item">
-                <img src="https://image2url.com/r2/default/images/1771003294954-0da316ac-cff8-46dd-89f5-c6c679585ae6.png" alt="Our Beautiful Memories" class="gallery-image">
+                <img src="https://image2url.com/r2/default/images/1771007667636-b576f50b-5031-47c6-915f-058886bb045d.png" alt="Our Beautiful Memories" class="gallery-image">
                 <div class="gallery-caption">Our Beautiful Memories</div>
             </div>
             <div class="gallery-item">
-                <img src="https://image2url.com/r2/default/images/1771003342096-5271cf57-b326-4038-a76c-849083d9a503.png" alt="Our Beautiful Memories" class="gallery-image">
+                <img src="https://image2url.com/r2/default/images/1771007704123-d2327b80-f430-4b4b-ae1f-8ba1fe6f69a0.png" alt="Our Beautiful Memories" class="gallery-image">
                 <div class="gallery-caption">Our Beautiful Memories</div>
             </div>
             <div class="gallery-item">
-                <img src="https://image2url.com/r2/default/images/1771003419239-66536daa-fc51-4dc5-953f-9b6ba54bfc9d.png" alt="Our Beautiful Memories" class="gallery-image">
-                <div class="gallery-caption">Our Beautiful Memories</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://image2url.com/r2/default/images/1771003470589-81799071-1aba-41af-986f-74cb8a02702e.png" alt="Our Beautiful Memories" class="gallery-image">
-                <div class="gallery-caption">Our Beautiful Memories</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://image2url.com/r2/default/images/1771003515632-720fd893-017f-4be8-9f30-3cfaae542de5.png" alt="Our Beautiful Memories" class="gallery-image">
+                <img src="https://image2url.com/r2/default/images/1771007730042-fada2485-7a8f-47db-86d4-dc9367d450b5.png" alt="Our Beautiful Memories" class="gallery-image">
                 <div class="gallery-caption">Our Beautiful Memories</div>
             </div>
         </div>
@@ -1026,7 +1172,7 @@
                     <div style="font-size: 80px; margin-bottom: 20px; animation: pulse 1s infinite;">🔓</div>
                     <h3 style="color: #c2185b; margin-bottom: 20px;">💌 A Secret Message From My Heart</h3>
                     <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">
-                        The best couples are not the ones who never fight — they are the ones who choose love, understanding, and each other even after every storm. 💖<br><br>
+                        My love, you are the most beautiful part of my life. Every moment with you feels like a blessing I never want to lose. Your smile lights up my world, your voice feels like home, and your presence makes everything better. Loving you is the easiest and most natural thing my heart has ever done. You are my peace in every storm, my happiness in every day, and my forever in every dream. I don't just love you for who you are — I adore you for the way you make my life feel complete. With you, love feels soft, strong, magical, and endless. You are my always. ❤️✨<br><br>
                         <strong style="color: #c2185b; font-size: 16px;">Forever yours,<br>Your Love 💕</strong>
                     </p>
                     <button class="cta-button" onclick="lockMessage()" style="margin-top: 20px; width: 100%;">Lock Again 🔒</button>
@@ -1162,12 +1308,13 @@
         });
 
         /* ===== PERSONALIZATION ===== */
-        const herName = "lavanya";
+        const herName = "vijay";
         window.addEventListener('DOMContentLoaded', function() {
             createFloatingHearts();
         });
     </script></body>
 </html>
+
 
 
 
